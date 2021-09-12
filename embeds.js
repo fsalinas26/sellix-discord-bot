@@ -9,7 +9,7 @@ function Order(data) {
 	const dataEmbed = new Discord.MessageEmbed()
 		.setTitle('Lookup Data')
 		.setDescription(`Data for Order: **${data.uniqid}**`)
-        .setThumbnail('https://i.ibb.co/fnGjLXc/bb545da78ff3a7d3db5466819642bb62.png')
+        .setThumbnail('https://cdn.sellix.io/static/logo/single-less-border.png')
 		.addFields(
 			{ name: 'Product: ', value: `${data.product_title} (${data.product_id})`, inline: true },
 			{ name: 'Quantity: ', value: `${data.quantity} ($${data.total})`, inline: true },
@@ -39,7 +39,7 @@ function Product(data) {
 	const dataEmbed = new Discord.MessageEmbed()
 		.setTitle('Lookup Product')
 		.setDescription(`Data for Product: **${data.uniqid}**`)
-        .setThumbnail('https://i.ibb.co/fnGjLXc/bb545da78ff3a7d3db5466819642bb62.png')
+        .setThumbnail('https://cdn.sellix.io/static/logo/single-less-border.png')
 		.addFields(
 			{ name: 'Title: ', value: `${data.title}`, inline: true },
 			{ name: 'Price: ', value: `$${data.price}`, inline: true },
@@ -65,7 +65,7 @@ function Query(data) {
 	const dataEmbed = new Discord.MessageEmbed()
 		.setTitle('Lookup Query')
 		.setDescription(`Data for Query: **${data.uniqid}**`)
-        .setThumbnail('https://i.ibb.co/fnGjLXc/bb545da78ff3a7d3db5466819642bb62.png')
+        .setThumbnail('https://cdn.sellix.io/static/logo/single-less-border.png')
 		.addFields(
 			{ name: 'Title: ', value: `${data.title}`, inline: true },
 			{ name: 'Customer Email: ', value: `${data.customer_email}`, inline: true },
@@ -84,7 +84,7 @@ function Feedback(data) {
 	const dataEmbed = new Discord.MessageEmbed()
 		.setTitle('Lookup Feedback')
 		.setDescription(`Data for Feedback: **${data.uniqid}**`)
-        .setThumbnail('https://i.ibb.co/fnGjLXc/bb545da78ff3a7d3db5466819642bb62.png')
+        .setThumbnail('https://cdn.sellix.io/static/logo/single-less-border.png')
 		.addFields(
 			{ name: 'Customer Invoice: ', value: `${data.invoice_id}`, inline: true },
 			{ name: 'Product: ', value: `${data.product_title}`, inline: true },

@@ -6,7 +6,7 @@
   "dependencies": {
     "discord.js": "^12.5.3",
     "inquirer": "^8.1.2",
-    "sellix-api-wrapper": "^1.0.6"
+    "sellix-api-wrapper": "^1.0.7"
   },
   "repository": {
     "type": "git",

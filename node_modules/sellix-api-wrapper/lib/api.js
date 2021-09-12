@@ -160,12 +160,12 @@ class Sellix{
 	}
 	/**
 	 * @param {string} id ID of coupon to edit.
-	 * @param {*} args Coupon arguments to edit. See Sellix Documentation.
+	 * @param {*} fields Coupon fields to edit. See Sellix Documentation. https://developers.sellix.io/documentation#coupon-edit
 	 */
-    editCoupon(id,args) {
+    editCoupon(id,fields) {
 		const params = `coupons/${id}`;
 		return new Promise((resolve, reject) => {
-			this.apiRequest(params,args,'PUT').then(data => {
+			this.apiRequest(params,fields,'PUT').then(data => {
 				resolve(data);
 			}).catch(err => {
 				reject(err);
@@ -211,13 +211,13 @@ class Sellix{
 	 * @param {array} gateways Array of available gateways. ex ["STRIPE","BITCOIN","CASHAPP"]
 	 * @param {string} type Type of product. serials, file, or service.
 	 * @param {float} discount_value Percentage amount of discount
-	 * @param {*} args See Sellix Documentation for arguments.
+	 * @param {*} fields Product fields to set. See Sellix Documentation. https://developers.sellix.io/documentation#product-create
 	 */
-    createProduct(title, description, price, gateways, type, discount_value,args) {
+    createProduct(title, description, price, gateways, type, discount_value,fields) {
         let product = new Product(title,description,price,gateways,type,discount_value);
 		const params = `products`;
 		return new Promise((resolve, reject) => {
-			this.apiRequest(params, {...product,...args},'POST').then(data => {
+			this.apiRequest(params, {...product,...fields},'POST').then(data => {
 				resolve(data);
 			}).catch(err => {
 				reject(err);
@@ -226,18 +226,20 @@ class Sellix{
 	}
 	/**
 	 * @param {string} id ID of the product to edit
-	 * @param {*} args Product arguments to edit. See Sellix Documentation.
+	 * @param {*} fields Product fields to edit. See Sellix Documentation. https://developers.sellix.io/documentation#product-edit
 	 */
-    editProduct(id,args) {
+    editProduct(id,fields) {
 		const params = `products/${id}`;
 		return new Promise((resolve, reject) => {
-			this.apiRequest(params,args,'PUT').then(data => {
+			this.apiRequest(params,fields,'PUT').then(data => {
 				resolve(data);
 			}).catch(err => {
 				reject(err);
 			});
 		});
 	}
+
+	
 	/**
 	 * @param {string} id ID of the product to delete
 	 */

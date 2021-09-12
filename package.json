@@ -1,0 +1,22 @@
+{
+  "name": "sellix-discord-bot",
+  "version": "1.0.0",
+  "description": "A Complete Sellix.io Discord Bot",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "inquirer": "^8.1.2",
+    "sellix-api-wrapper": "^1.0.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fsalinas26/sellix-discord-bot.git"
+  },
+  "keywords": [
+    "Sellix",
+    "Discord",
+    "Bot"
+  ],
+  "author": "fsalinas26",
+  "license": "ISC"
+}

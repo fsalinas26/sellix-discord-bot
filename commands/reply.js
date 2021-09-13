@@ -2,6 +2,7 @@ const Sellix = require('sellix-api-wrapper');
 const config = require('../config.json');
 const API = new Sellix.API(config.sellix_auth);
 const Discord = require('discord.js');
+const embeds = require('../embeds')
 const fs = require('fs');
 
 
@@ -57,14 +58,16 @@ module.exports = {
     adminOnly: true,
     execute(message,args){
         const input = args[0];
-        if(config.nicknames[args[1]])
-            args[1] = config.nicknames[args[1]]
-        const reply = (args.slice(2)).join(' ');
+        if(args[1] && config.nicknames)
+        {   if(config.nicknames[args[1]])
+                args[1] = config.nicknames[args[1]]
+        }
         switch(input)
         {
             case 'feedback':
                 if(!args[1]) return message.reply("Missing Feedback ID!");
                 if(!args[2]) return message.reply("Missing Reply");
+                var reply = (args.slice(2)).join(' ');
                 API.replyFeedback(args[1],reply).then(data=>{
                         message.reply(data.message);
                     API.getFeedback(args[1]).then(data=>{
@@ -81,6 +84,7 @@ module.exports = {
             case 'query':
                 if(!args[1]) return message.reply("Missing Query ID!");
                 if(!args[2]) return message.reply("Missing Reply");
+                var reply = (args.slice(2)).join(' ');
                 API.replyQuery(args[1],reply).then(data=>{
                     message.reply(data.message);
                     API.getQuery(args[1]).then(data=>{
@@ -92,9 +96,29 @@ module.exports = {
                     console.log(err.message);
                     return message.reply(err.message);
                 })
-
                 break;
             default:
+                var reply = (args.slice(0)).join(' ');
+                API.getAllFeedback().then(data=>{
+                    if(data.data)
+                    {
+                        const feedbackID = data.data.feedback[0].uniqid;
+                        API.replyFeedback(feedbackID,reply).then(res=>{
+                            message.reply(res.message);
+                            API.getFeedback(feedbackID).then(data=>{
+                                if(data.data)
+                                {
+                                const feedbackEmbed = embedFeedback(data.data.feedback);
+                                return message.reply(feedbackEmbed);
+                                }else{
+                                    throw Error('Error replying to feedback')
+                                }
+                            })
+                        })
+                    }else{
+                        throw Error('Error Fetching Feedback')
+                    }
+                })
                 break;
         }
     }

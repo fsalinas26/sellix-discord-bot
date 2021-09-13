@@ -33,6 +33,7 @@ client.once('ready', () => {
 
 webhook.event.on('event',function(event_name, event_data){
 	const command = client.commands.get(event_name);
+	if(!command)return;
 	var embed = command.execute(event_data);
 	const channel = client.channels.cache.get(config.webhook_channel);
 	if(embed)channel.send(embed);

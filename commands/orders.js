@@ -2,8 +2,6 @@ const Sellix = require('sellix-api-wrapper');
 const config = require('../config.json');
 const API = new Sellix.API(config.sellix_auth);
 const Discord = require('discord.js');
-const macros = require('../macros');
-const { displayDate } = require('../macros');
 
 function embedOrder(data, index)
 {

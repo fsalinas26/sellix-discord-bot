@@ -1,10 +1,9 @@
 const Discord = require('discord.js');
-const macros = require('../macros')
 
 module.exports = {
     name: 'product:stock',
     execute(data){
-        if(data.quantity != 0)return;
+        if(data.stock > 1)return;
         console.log(data);
         const embed = new Discord.MessageEmbed()
         .setTitle(`${data.title} OUT OF STOCK`)

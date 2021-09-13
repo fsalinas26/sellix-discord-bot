@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const macros = require('../macros')
+const macros = require('./macros');
 
 module.exports = {
     name: 'order:paid',

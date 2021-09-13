@@ -4,6 +4,7 @@
   "description": "A Complete Sellix.io Discord Bot",
   "main": "index.js",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "discord.js": "^12.5.3",
     "express": "^4.17.1",
     "inquirer": "^8.1.2",

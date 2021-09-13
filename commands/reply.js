@@ -2,7 +2,7 @@ const Sellix = require('sellix-api-wrapper');
 const config = require('../config.json');
 const API = new Sellix.API(config.sellix_auth);
 const Discord = require('discord.js');
-const embeds = require('../embeds')
+const embeds = require('./embeds')
 const fs = require('fs');
 
 

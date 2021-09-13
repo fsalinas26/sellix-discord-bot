@@ -1,6 +1,3 @@
-const Discord = require('discord.js');
-const macros = require('../macros')
-
 module.exports = {
     name: 'feedback:received',
     execute(data){

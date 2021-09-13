@@ -2,6 +2,8 @@ const Sellix = require('sellix-api-wrapper');
 const config = require('../config.json');
 const API = new Sellix.API(config.sellix_auth);
 const Discord = require('discord.js');
+const macros = require('../macros');
+const { displayDate } = require('../macros');
 
 function embedOrder(data, index)
 {
@@ -13,9 +15,20 @@ function embedOrder(data, index)
 		.setColor('#00ff3c')
 		.setDescription(`Displaying ${index + 1}-${index + current.length} out of ${data.length} orders`);
 	current.forEach(order =>{
-        dataEmbed.addField(`Order: ${order.uniqid} `,`Product: ${order.product_title}\nGateway: ${order.gateway}\nStatus: ${order.status}\nCustomer Email: ${order.customer_email}`)
+        dataEmbed.addField(`Order ${order.uniqid}`,`\`\`\`Product: ${order.product_title}\nGateway: ${order.gateway} (${order.status})\nEmail: ${order.customer_email}\n${displayDate(order.created_at)}\`\`\``)
     });
 	return dataEmbed;
+}
+
+function filterOrders(filter,orders)
+{
+    let filteredOrders = [];
+    for(var [key,value] of Object.entries(orders))
+    {
+        if(value.status == filter)
+            filteredOrders.push(value);
+    }
+    return filteredOrders;
 }
 
 module.exports = {
@@ -24,7 +37,9 @@ module.exports = {
     adminOnly: true,
     execute(message,args){
         API.getAllOrders().then(data=>{
-            const orders = data.data.orders;
+            var orders = data.data.orders;
+            if(args[0])
+                orders = filterOrders(args[0],orders)
             message.reply(embedOrder(orders, 0)).then(msg => {
                 if (orders.length <= 5) return;
                 msg.react('➡️');

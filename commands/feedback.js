@@ -13,7 +13,7 @@ function embedFeedback(data, index)
 		.setColor('#00ff3c')
 		.setDescription(`Displaying ${index + 1}-${index + current.length} out of ${data.length} Feedbacks`);
 	current.forEach(query =>{
-        dataEmbed.addField(`Feedback: ${query.uniqid} `,`Feedback: ${query.message}\nReply: ${query.reply?query.reply:"NONE"}`)
+        dataEmbed.addField(`Feedback ${query.uniqid} `,`\`\`\`Message: ${query.message}\nReply: ${query.reply?query.reply:"NONE"}\`\`\``)
     });
 	return dataEmbed;
 }

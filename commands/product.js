@@ -13,7 +13,7 @@ function embedProducts(data, index)
 		.setColor('#00ff3c')
 		.setDescription(`Displaying ${index + 1}-${index + current.length} out of ${data.length} products`);
 	current.forEach(product =>{
-        dataEmbed.addField(`${product.title} `,`ID: ${product.uniqid}\nPrice: $${product.price}\nStock: ${product.stock}`)
+        dataEmbed.addField(`${product.title} `,`\`\`\`ID: ${product.uniqid}\nPrice: $${product.price}\nStock: ${product.stock}\`\`\``)
     });
 	return dataEmbed;
 }

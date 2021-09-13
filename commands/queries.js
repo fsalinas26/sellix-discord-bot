@@ -14,7 +14,7 @@ function embedQueries(data, index)
 		.setColor('#00ff3c')
 		.setDescription(`Displaying ${index + 1}-${index + current.length} out of ${data.length} queries`);
 	current.forEach(query =>{
-        dataEmbed.addField(`Query: ${query.uniqid} `,`Title: ${query.title}\nStatus: ${query.status}\nTime: ${macros.displayDate(query.created_at)}`)
+        dataEmbed.addField(`Query: ${query.uniqid} `,`\`\`\`Title: ${query.title}\nStatus: ${query.status}\n${macros.displayDate(query.created_at)}\`\`\``)
     });
 	return dataEmbed;
 }

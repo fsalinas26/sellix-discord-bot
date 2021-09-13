@@ -3,7 +3,7 @@ function displayDate(time)
 {
     let day = new Date(time*1000);
     var str_out = "";
-    str_out+= `${months[day.getMonth()]} ${day.getDate()} at ${day.getHours()%12}:${day.getMinutes()} ${day.getHours() < 12 ? "AM":"PM"}`
+    str_out+= `${months[day.getMonth()]} ${day.getDate()} at ${day.toLocaleTimeString('en-US')}`;
     return str_out;
 }
 
@@ -11,7 +11,7 @@ function displayTime(time)
 {
     let day = new Date(time*1000);
     var str_out = "";
-    str_out+= `${day.getHours()%12}:${day.getMinutes()} ${day.getHours() < 12 ? "AM":"PM"}`
+    str_out+= `${day.getHours()%12}:${day.getMinutes()} ${day.getHours() < 12 ? "AM":"PM"}`;
     return str_out;
 }
 

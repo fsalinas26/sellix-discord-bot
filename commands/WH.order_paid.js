@@ -14,7 +14,7 @@ module.exports = {
             {name: "Gateway", value: data.gateway,inline:true},
             {name: "Product", value: data.product_title,inline:true},
             {name: 'Quantity', value: data.quantity, inline:true},
-            {name: "Total", value: data.total,inline: true},
+            {name: "Total", value: `$${data.total}`,inline: true},
             {name: 'Customer Email',value: data.customer_email,inline:true},
             {name: 'Customer IP', value: data.ip,inline:true},
             {name: 'Customer Location', value: data.location,inline:true},
@@ -29,9 +29,11 @@ module.exports = {
             {name: 'Proxy', value: data.ip_info.proxy, inline:true},
             {name: 'VPN', value: data.ip_info.vpn, inline:true},
             {name: 'TOR', value: data.ip_info.tor, inline:true},
+            {name: 'Type', value: data.product_type, inline:true},
+			{name: `${data.product_type}`, value: (data.product_type==="SERIALS")?((data.serials[0])?data.serials[0]:'nil'):data.file_attachment_uniqid, inline: true },
             {name: 'Date', value: macros.displayDate(data.created_at),inline:false}
         )
-        .setFooter('This is an automatic Webhook notification from Sellix.io Discord Bot')
+        .setFooter('This is a webhook notification from Sellix.io Discord Bot (github/fsalinas26)')
         .setTimestamp();
         return embed;        
     }

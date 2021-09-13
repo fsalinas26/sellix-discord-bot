@@ -40,7 +40,7 @@ function embedFeedback(data) {
 
 function embedQuery(data) {
 	const dataEmbed = new Discord.MessageEmbed()
-		.setTitle('Lookup Query')
+		.setTitle('Query Reply')
 		.setDescription(`Data for Query: **${data.uniqid}**`)
         .setThumbnail('https://cdn.sellix.io/static/logo/single-less-border.png')
         data.messages.forEach(o=>{
@@ -65,88 +65,87 @@ module.exports = {
         switch(input)
         {
             case 'feedback':
+                try
+                {
                 if(!args[1]) return message.reply("Missing Feedback ID!");
                 if(!args[2]) return message.reply("Missing Reply");
                 var reply = (args.slice(2)).join(' ');
                 API.replyFeedback(args[1],reply).then(data=>{
-                        message.reply(data.message);
+                    if(data.error)return message.reply(data.error);
+                    message.reply(data.message);
                     API.getFeedback(args[1]).then(data=>{
+                        if(data.error)return message.reply(data.error);
                         data = data.data.feedback;
                         const feedbackEmbed = embedFeedback(data);
                         return message.reply(feedbackEmbed);
                     })
-                }).catch(err=>{
-                    console.log(err.message);
-                    return message.reply(err.message);
                 })
-                
-                break;
+                }catch(err){
+                    return message.reply(err.message);
+                }
+            break;
             case 'query':
+                try
+                {
                 if(!args[1]) return message.reply("Missing Query ID!");
                 if(!args[2]) return message.reply("Missing Reply");
                 var reply = (args.slice(2)).join(' ');
                 API.replyQuery(args[1],reply).then(data=>{
+                    if(data.error)return message.reply(data.error);
                     message.reply(data.message);
                     API.getQuery(args[1]).then(data=>{
+                        console.log(data);
+                        if(data.error)return message.reply(data.error);
                         data = data.data.query;
                         const queryEmbed = embedQuery(data);
                         return message.reply(queryEmbed);
                     })
-                }).catch(err=>{
-                    console.log(err.message);
-                    return message.reply(err.message);
                 })
-                break;
+                }catch(err){
+                    return message.reply(err.message);
+                }
+            break;
             case 'f':
-                var reply = (args.slice(1)).join(' ');
-                API.getAllFeedback().then(data=>{
-                    if(data.data)
+                    try
                     {
+                    var reply = (args.slice(1)).join(' ');
+                    API.getAllFeedback().then(data=>{
+                        if(data.error)throw Error(data.error);
                         const feedbackID = data.data.feedback[0].uniqid;
-                        API.replyFeedback(feedbackID,reply).then(res=>{
-                            message.reply(res.message);
+                        API.replyFeedback(feedbackID,reply).then(data=>{
+                            if(data.error)return message.reply(data.error);
+                            message.reply(data.message);
                             API.getFeedback(feedbackID).then(data=>{
-                                if(data.data)
-                                {
+                                if(data.error)return message.reply(data.error);
                                 const feedbackEmbed = embedFeedback(data.data.feedback);
                                 return message.reply(feedbackEmbed);
-                                }else{
-                                    throw Error('Error replying to feedback')
-                                }
                             })
                         })
-                    }else{
-                        throw Error('Error Fetching Feedback')
-                    }
-                }).catch(err=>{
-                    console.log(err.message);
-                    return message.reply(err.message);
-                })
-                case 'q':
-                    var reply = (args.slice(1)).join(' ');
-                    API.getAllQueries().then(data=>{
-                        if(data.data)
-                        {
-                            const queryID = data.data.queries[0].uniqid;
-                            API.replyFeedback(queryID,reply).then(res=>{
-                                message.reply(res.message);
-                                API.getQuery(queryID).then(data=>{
-                                    if(data.data)
-                                    {
-                                    const queryEmbed = embedQuery(data.data.query);
-                                    return message.reply(queryEmbed);
-                                    }else{
-                                        throw Error('Error replying to Query')
-                                    }
-                                })
-                            })
-                        }else{
-                            throw Error('Error Fetching Query')
-                        }
-                    }).catch(err=>{
-                        console.log(err.message);
-                        return message.reply(err.message);
                     })
+                    }catch(err){
+                        return message.reply(err.message);
+                    }
+                break;
+                case 'q':
+                    try
+                    {
+                        var reply = (args.slice(1)).join(' ');
+                        API.getAllQueries().then(data=>{
+                                if(data.error)return message.reply(data.error);
+                                const queryID = data.data.queries[0].uniqid;
+                                API.replyFeedback(queryID,reply).then(res=>{
+                                    message.reply(res.message);
+                                    API.getQuery(queryID).then(data=>{
+                                        if(data.error)return message.reply(data.error);
+                                        const queryEmbed = embedQuery(data.data.query);
+                                        return message.reply(queryEmbed);
+                                    })
+                            })
+                        })   
+                    }catch(err)
+                    {
+                        return message.reply(err.message);
+                    }
                 break;
                 default:
                     break;

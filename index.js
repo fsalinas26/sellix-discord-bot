@@ -28,7 +28,6 @@ function VerifyConfig() {
 client.once('ready', () => {
 	VerifyConfig();
 	ImportCommands();
-	webhook.testHook();
 	console.log(`Logged in as ${client.user.tag}`);
 });
 

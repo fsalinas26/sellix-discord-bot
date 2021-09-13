@@ -10,21 +10,10 @@ app.post('/hook',async(req,res)=>{
     event.emit('event',res.body.evet,res.body.data);
 })
 
-function testHook()
-{
-    let obj = {}
-    fs.readFile('./events.json',(err,data)=>{
-        obj = JSON.parse(data);
-        event.emit('event',obj.event,obj.data);
-
-    })
-}
-
 app.listen(port,()=>{
     console.log(`Listening for Sellix Webhooks on port ${port}`);
 })
 
 module.exports = {
-    event:event,
-    testHook:testHook
+    event:event
 }

@@ -3,9 +3,12 @@
 const fs = require('fs');
 const Discord = require('discord.js');
 const config = require('./config.json');
-
+const eventEmitter = require('events');
+const embeds = require('./embeds');
+const webhook = require('./webhook')
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] })
 client.commands = new Discord.Collection();
+
 
 function ImportCommands() {
 	const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -25,8 +28,16 @@ function VerifyConfig() {
 client.once('ready', () => {
 	VerifyConfig();
 	ImportCommands();
+	webhook.testHook();
 	console.log(`Logged in as ${client.user.tag}`);
 });
+
+webhook.event.on('event',function(event_name, event_data){
+	const command = client.commands.get(event_name);
+	var embed = command.execute(event_data);
+	const channel = client.channels.cache.get('885701081521324077');
+	if(embed)channel.send(embed);
+})
 
 client.on('message', async message => {
 	const prefix = config.prefix;

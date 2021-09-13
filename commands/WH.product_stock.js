@@ -3,12 +3,12 @@ const Discord = require('discord.js');
 module.exports = {
     name: 'product:stock',
     execute(data){
-        if(data.stock > 1)return;
-        console.log(data);
+        if(data.stock > 2)return;
+        var stock_status = data.stock === 0?"OUT OF STOCK":"LOW ON STOCK"
         const embed = new Discord.MessageEmbed()
-        .setTitle(`${data.title} OUT OF STOCK`)
+        .setTitle(`${data.title} ${stock_status}`)
         .setURL(`https://dashboard.sellix.io/products/edit/${data.uniqid}`)
-        .setDescription('One of your products is out of stock!')
+        .setDescription(`One of your products is ${stock_status.toLowerCase()}`)
         .setThumbnail('https://cdn.sellix.io/static/logo/single-less-border.png')
         .addFields(
             {name: "Uniqid", value: data.uniqid,inline: true},

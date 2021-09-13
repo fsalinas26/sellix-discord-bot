@@ -11,7 +11,7 @@ module.exports = {
             {name: 'Review', value: data.message, inline:true},
             {name: 'Starts', value: `${data.score}/5`,inline:true},
         )
-        .setFooter('This is an automatic Webhook notification from Sellix.io Discord Bot')
+        .setFooter('This is a webhook notification from Sellix.io Discord Bot (github/fsalinas26)')
         .setTimestamp();
         return embed;        
     }

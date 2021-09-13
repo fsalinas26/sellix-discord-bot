@@ -35,7 +35,7 @@ module.exports = {
         
         API.getAllFeedback().then(data=>{
             var feedback = data.data.feedback;
-            if(args[0])
+            if(args[0]==="filter")
             {
                 feedback = filterFeedback(feedback);
             }

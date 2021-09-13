@@ -24,7 +24,7 @@ var questions = [
   },
   {
     type: 'input',
-    name: 'Webhook_Channel',
+    name: 'webhook_channel',
     message: "ChannelID to Send Webhooks: "
   }
 ]

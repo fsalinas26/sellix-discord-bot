@@ -97,8 +97,8 @@ module.exports = {
                     return message.reply(err.message);
                 })
                 break;
-            default:
-                var reply = (args.slice(0)).join(' ');
+            case 'f':
+                var reply = (args.slice(1)).join(' ');
                 API.getAllFeedback().then(data=>{
                     if(data.data)
                     {
@@ -118,8 +118,38 @@ module.exports = {
                     }else{
                         throw Error('Error Fetching Feedback')
                     }
+                }).catch(err=>{
+                    console.log(err.message);
+                    return message.reply(err.message);
                 })
+                case 'q':
+                    var reply = (args.slice(1)).join(' ');
+                    API.getAllQueries().then(data=>{
+                        if(data.data)
+                        {
+                            const queryID = data.data.queries[0].uniqid;
+                            API.replyFeedback(queryID,reply).then(res=>{
+                                message.reply(res.message);
+                                API.getQuery(queryID).then(data=>{
+                                    if(data.data)
+                                    {
+                                    const queryEmbed = embedQuery(data.data.query);
+                                    return message.reply(queryEmbed);
+                                    }else{
+                                        throw Error('Error replying to Query')
+                                    }
+                                })
+                            })
+                        }else{
+                            throw Error('Error Fetching Query')
+                        }
+                    }).catch(err=>{
+                        console.log(err.message);
+                        return message.reply(err.message);
+                    })
                 break;
+                default:
+                    break;
         }
     }
 }

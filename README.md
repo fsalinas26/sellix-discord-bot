@@ -4,6 +4,9 @@ Complete Sellix.io Discord Bot using my [API wrapper](https://github.com/fsalina
   <img src="https://i.gyazo.com/0943bf2926d9221f493fe2b6785080f6.png">
 </p>
 
+* [Commands](https://github.com/fsalinas26/sellix-discord-bot#commands)
+* [Webhooks](https://github.com/fsalinas26/sellix-discord-bot#sellix-webhooks)
+
 # Requirements
 * Sellix.io API Key
 * Discord Bot Token
@@ -15,9 +18,10 @@ Complete Sellix.io Discord Bot using my [API wrapper](https://github.com/fsalina
 git clone https://github.com/fsalinas26/sellix-discord-bot  
 cd ./sellix-discord-bot  
 npm install  
-node config.js //run this script to initialize your config.json using CLI  
+npm run setup //run this script to initialize your config.json using CLI  
 node index.js  
 ```
+
 
 # Commands
 
@@ -65,3 +69,11 @@ Retrieves all queries and sends an iterable Discord embed.
 
 ## ?feedback  
 Retrieves all feedback and sends an iterable Discord embed.
+
+# Sellix Webhooks
+The default port for the webhook is 3000, and all webhook request should be forwarded to  
+your server address with the */hook* route  
+[Add Sellix Webhook Endpoint](https://dashboard.sellix.io/developer/webhooks/all)  
+<img width="50%" height="50%" src="https://i.gyazo.com/b73509330ed011f94e1a03e9be34902e.png">
+
+Current supported webhook events are **order:paid**, **feedback:received**, **query:created**, **product:stock**, **query:replied**

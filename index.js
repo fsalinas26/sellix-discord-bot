@@ -5,7 +5,7 @@ const Discord = require('discord.js');
 const config = require('./config.json');
 const eventEmitter = require('events');
 const embeds = require('./commands/embeds');
-const webhook = require('./webhook/webhook')
+const webhook = require('./webhook/webhook');
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] })
 client.commands = new Discord.Collection();
 

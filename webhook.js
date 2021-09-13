@@ -7,7 +7,7 @@ const port = 2000;
 
 app.post('/hook',async(req,res)=>{
     res.sendStatus(200);
-    event.emit('event',res.body.evet,res.body.data);
+    event.emit('event',res.body.event,res.body.data);
 })
 
 app.listen(port,()=>{

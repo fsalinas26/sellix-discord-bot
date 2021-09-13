@@ -21,12 +21,17 @@ var questions = [
     type: 'input',
     name: 'admins',
     message: "Comma-Seperated List of Admin Discord ID's: "
+  },
+  {
+    type: 'input',
+    name: 'Webhook_Channel',
+    message: "ChannelID to Send Webhooks: "
   }
 ]
 
 inquirer.prompt(questions).then(answers => {
   answers['admins'] = answers['admins'].split(',');
-  answers['nicknames'] = {'example':'6abc74103id'};
+  answers['nicknames'] = {'exampleProduct':'6abc74103id'};
   fs.writeFile('./config.json',JSON.stringify(answers),function(err,data){
       console.log(answers);
   });

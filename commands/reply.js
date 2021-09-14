@@ -133,7 +133,7 @@ module.exports = {
                         API.getAllQueries().then(data=>{
                                 if(data.error)return message.reply(data.error);
                                 const queryID = data.data.queries[0].uniqid;
-                                API.replyFeedback(queryID,reply).then(res=>{
+                                API.replyQuery(queryID,reply).then(res=>{
                                     message.reply(res.message);
                                     API.getQuery(queryID).then(data=>{
                                         if(data.error)return message.reply(data.error);

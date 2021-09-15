@@ -1,8 +1,11 @@
 const Discord = require('discord.js');
 const macros = require('../../commands/macros')
+const config = require('../../config.json')
+
 module.exports = {
     name: 'query:replied',
     webhook: true,
+    channel: config.webhook_channels['query:replied'],
     execute(data){
         var lastMsg = data.messages[data.messages.length-1];
         const embed = new Discord.MessageEmbed()

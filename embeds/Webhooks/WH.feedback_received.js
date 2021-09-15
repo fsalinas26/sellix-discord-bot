@@ -3,7 +3,7 @@ const config = require('../../config.json');
 module.exports = {
     name: 'feedback:received',
     Webhook: true,
-    channel: config.webhook_channels[this.name],
+    channel: config.webhook_channels['feedback:received'],
     execute(data){
         const embed = new Discord.MessageEmbed()
         .setTitle('New Feedback Recevied')

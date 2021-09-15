@@ -1,9 +1,11 @@
 const Discord = require('discord.js');
 const macros = require('../../commands/macros')
+const config = require('../../config.json')
 
 module.exports = {
     name: 'query:created',
     webhook: true,
+    channel: config.webhook_channels['query:created'],
     execute(data){
         const embed = new Discord.MessageEmbed()
         .setTitle(`Query Created`)

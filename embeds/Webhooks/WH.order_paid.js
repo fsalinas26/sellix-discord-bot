@@ -1,9 +1,11 @@
 const Discord = require('discord.js');
 const macros = require('../../commands/macros')
+const config = require('../../config.json')
 
 module.exports = {
     name: 'order:paid',
     webhook: true,
+    channel: config.webhook_channels['order:paid'],
     execute(data){
         const embed = new Discord.MessageEmbed()
         .setTitle('You Made a New Sale')

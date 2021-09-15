@@ -1,7 +1,5 @@
 const Sellix = require('sellix-api-wrapper');
 const config = require('../config.json');
-const API = new Sellix.API(config.sellix_auth);
-const Discord = require('discord.js');
 const fs = require('fs');
 
 module.exports = {
@@ -17,16 +15,14 @@ module.exports = {
                 let obj = {};
                 obj[args[1]] = args[2];
                 config.nicknames = {...config.nicknames,...obj};
-                console.log(config);
-                fs.writeFile('./config.json',JSON.stringify(config),function(err,data){
+                fs.writeFile('./config.json',JSON.stringify(config,null,' \t'),function(err,data){
                     return message.reply(`Added product nickname to **config.json**\`\`\`Nickname: ${args[1]}\nProduct ID: ${args[2]}\`\`\``);
                 });
                 break;
             case 'delete':
                 if(!args[1]) return message.reply("Missing Product Nickname!");
                 delete config.nicknames[args[1]];
-                console.log(config);
-                fs.writeFile('./config.json',JSON.stringify(config),function(err,data){
+                fs.writeFile('./config.json',JSON.stringify(config,null,' \t'),function(err,data){
                     return message.reply(`Deleted nickname ${args[1]}`)
                 });
                 break;

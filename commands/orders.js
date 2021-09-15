@@ -2,6 +2,7 @@ const Sellix = require('sellix-api-wrapper');
 const config = require('../config.json');
 const API = new Sellix.API(config.sellix_auth);
 const Discord = require('discord.js');
+const macros = require('./macros')
 
 function embedOrder(data, index)
 {
@@ -13,7 +14,7 @@ function embedOrder(data, index)
 		.setColor('#00ff3c')
 		.setDescription(`Displaying ${index + 1}-${index + current.length} out of ${data.length} orders`);
 	current.forEach(order =>{
-        dataEmbed.addField(`Order ${order.uniqid}`,`\`\`\`Product: ${order.product_title}\nGateway: ${order.gateway} (${order.status})\nEmail: ${order.customer_email}\n${displayDate(order.created_at)}\`\`\``)
+        dataEmbed.addField(`Order ${order.uniqid}`,`\`\`\`Product: ${order.product_title}\nGateway: ${order.gateway} (${order.status})\nEmail: ${order.customer_email}\n${macros.displayDate(order.created_at)}\`\`\``)
     });
 	return dataEmbed;
 }

@@ -1,7 +1,7 @@
 const Sellix = require('sellix-api-wrapper');
 const config = require('../config.json');
 const API = new Sellix.API(config.sellix_auth);
-const embeds = require('../embeds/Commands/embeds')
+const embeds = require('../embeds/Commands/embeds.js')
 
 module.exports = {
     name: "reply",

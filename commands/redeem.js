@@ -1,8 +1,8 @@
 const Sellix = require('sellix-api-wrapper');
 const config = require('../config.json');
 const API = new Sellix.API(config.sellix_auth);
-const embeds = require('../embeds/commands/embeds')
-const macros = require('./macros');
+const embeds = require('../embeds/commands/embeds.js')
+const macros = require('./macros.js');
 const query1 = `SELECT * FROM Users WHERE OrderID = ?`;
 const query2 = `INSERT INTO Users(OrderID, DiscordID, RedeemedOn) VALUES (?,?,?)`
 

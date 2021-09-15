@@ -4,7 +4,7 @@ const config = require('../../config.json')
 module.exports = {
     name: 'product:stock',
     webhook: true,
-    channel: config.webhook_channels['product:stock'],
+    channel: config.webhook_channels['product:stock'] ?config.webhook_channels['product:stock']:config.webhook_channels['default'],
     execute(data){
         if(data.stock > 2)return;
         var stock_status = data.stock === 0?"OUT OF STOCK":"LOW ON STOCK"

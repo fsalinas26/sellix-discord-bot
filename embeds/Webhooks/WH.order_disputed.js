@@ -4,7 +4,7 @@ const config = require('../../config.json');
 module.exports = {
     name: 'order:disputed',
     webhook: true,
-    channel: config.webhook_channels['order:disputed'],
+    channel: config.webhook_channels['order:disputed'] ?config.webhook_channels['order:disputed']:config.webhook_channels['default'],
     execute(data){
         const embed = new Discord.MessageEmbed()
         .setTitle('PayPal Dispute Created')

@@ -5,7 +5,7 @@ const config = require('../../config.json')
 module.exports = {
     name: 'query:replied',
     webhook: true,
-    channel: config.webhook_channels['query:replied'],
+    channel: config.webhook_channels['query:replied'] ?config.webhook_channels['query:replied']:config.webhook_channels['default'],
     execute(data){
         var lastMsg = data.messages[data.messages.length-1];
         const embed = new Discord.MessageEmbed()

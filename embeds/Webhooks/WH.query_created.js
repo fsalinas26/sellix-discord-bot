@@ -5,7 +5,7 @@ const config = require('../../config.json')
 module.exports = {
     name: 'query:created',
     webhook: true,
-    channel: config.webhook_channels['query:created'],
+    channel: config.webhook_channels['query:created'] ?config.webhook_channels['query:created']:config.webhook_channels['default'],
     execute(data){
         const embed = new Discord.MessageEmbed()
         .setTitle(`Query Created`)

@@ -137,9 +137,20 @@ function WebhookChannel(WebhookEvent, ChannelID)
 	.setThumbnail('https://i.gyazo.com/325afc4bba55fe7d20feb0bd480dff92.png')
 	.addFields(
 		{name: 'Webhook Event', value: WebhookEvent, inline:false},
-		{name: 'ChannelID', value:`<#${ChannelID}>`, inline:false}
+		{name: 'Channel ID', value:`<#${ChannelID}>`, inline:false}
 	)
 	.setTimestamp()
+	return embed;
+}
+
+function ShowAdmins(admins)
+{
+	const embed = new Discord.MessageEmbed()
+	.setTitle(`All Sellix Discord Bot Admins`)
+	.setDescription('A list of all Discord tags with access to admin commands.')
+	.setThumbnail('https://i.gyazo.com/325afc4bba55fe7d20feb0bd480dff92.png')
+	admins.forEach(o=>{embed.addField('Admin',`<@${o}>`)})
+	embed.setTimestamp()
 	return embed;
 }
 module.exports = { 
@@ -150,5 +161,6 @@ module.exports = {
 	QueryReply:QueryReply,
 	FeedbackReply:FeedbackReply,
 	OrderRedeem:OrderRedeem,
-	WebhookChannel:WebhookChannel
+	WebhookChannel:WebhookChannel,
+	ShowAdmins:ShowAdmins
 }

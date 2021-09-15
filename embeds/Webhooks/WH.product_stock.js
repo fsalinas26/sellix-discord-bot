@@ -18,7 +18,7 @@ module.exports = {
             {name: "Title", value: data.title,inline:true},
             {name: "Current Quantity", value: data.stock,inline:true},
         )
-        .setFooter('This is an automatic Webhook notification from Sellix.io Discord Bot')
+        .setFooter('This is a webhook notification from Sellix.io Discord Bot (github/fsalinas26)')
         .setTimestamp();
         return embed;        
     }

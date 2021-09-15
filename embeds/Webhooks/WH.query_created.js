@@ -17,7 +17,7 @@ module.exports = {
             {name: "Customer Email", value: data.customer_email,inline: false},
             {name: "Title", value: data.title,inline:false},
             {name: `Message (${macros.displayTime(data.messages.created_at)})`, value: data.messages[0].message,inline:false})
-            .setFooter('This is a webhook notification from Sellix.io Discord Bot (github/fsalinas26)')
+        .setFooter('This is a webhook notification from Sellix.io Discord Bot (github/fsalinas26)')
         .setTimestamp();
         return embed;        
     }

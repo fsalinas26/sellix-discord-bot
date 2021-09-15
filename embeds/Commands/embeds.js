@@ -1,4 +1,5 @@
-const Discord = require('discord.js')
+const Discord = require('discord.js');
+const e = require('express');
 const macros = require('../../commands/macros')
 
 function Order(data) {
@@ -117,7 +118,7 @@ function QueryReply(data) {
 function OrderRedeem(OrderID, DiscordID, DateRedeemed)
 {
 	const embed = new Discord.MessageEmbed()
-	.setTitle('License Redeemed')
+	.setTitle('Order Redeemed')
 	.setDescription('A user has redeemed an OrderID!')
 	.setThumbnail('https://i.gyazo.com/316c9684acb080339c1d3df1327a41b2.png')
 	.addFields(
@@ -158,6 +159,44 @@ function WebhookChannel(WebhookEvent, ChannelID)
 	return embed;
 }
 
+function AddNickname(Nickname, ProductID)
+{
+	const embed = new Discord.MessageEmbed()
+	.setTitle(`Nickname Added to Config.json`)
+	.setDescription('A nickname has been created')
+	.setThumbnail('https://i.gyazo.com/325afc4bba55fe7d20feb0bd480dff92.png')
+	.addFields(
+		{name: 'Nickname', value: Nickname, inline:false},
+		{name: 'ProductID', value: ProductID, inline:false}
+	)
+	.setTimestamp()
+	return embed;
+}
+
+function RemoveNickname(Nickname)
+{
+	const embed = new Discord.MessageEmbed()
+	.setTitle(`Nickname Removed From Config.json`)
+	.setDescription('A nickname has been removed')
+	.setThumbnail('https://i.gyazo.com/325afc4bba55fe7d20feb0bd480dff92.png')
+	.addFields(
+		{name: 'Nickname', value: Nickname, inline:false}
+	)
+	.setTimestamp()
+	return embed;
+}
+function AllNicknames(map)
+{
+	const embed = new Discord.MessageEmbed()
+	.setTitle(`All Nicknames`)
+	.setDescription('A list of all nicknames')
+	.setThumbnail('https://i.gyazo.com/325afc4bba55fe7d20feb0bd480dff92.png')
+	map.forEach(o=>{embed.addField(`Nickname ${o.nickname}`,`ProductID ${o.productid}`)})
+	embed.setTimestamp()
+
+	return(embed);
+}
+
 function ShowAdmins(admins)
 {
 	const embed = new Discord.MessageEmbed()
@@ -178,5 +217,8 @@ module.exports = {
 	OrderRedeem:OrderRedeem,
 	WebhookChannel:WebhookChannel,
 	ShowAdmins:ShowAdmins,
-	DatabaseEntry:DatabaseEntry
+	DatabaseEntry:DatabaseEntry,
+	AddNickname:AddNickname,
+	RemoveNickname:RemoveNickname,
+	AllNicknames:AllNicknames
 }

@@ -5,17 +5,17 @@ var questions = [
   {
     type: 'input',
     name: 'token',
-    message: "What's your Discord Bot Token?"
+    message: "Discord Bot Token: "
   },
   {
     type: 'input',
     name: 'sellix_auth',
-    message: "What's your Sellix API Key?"
+    message: "Sellix API Key: "
   },
   {
     type: 'input',
     name: 'prefix',
-    message: "What command prefix do you want to use?"
+    message: "Command Prefix: "
   },
   {
     type: 'input',

@@ -103,21 +103,19 @@ module.exports = {
                             throw Error(`No Order Found for ${args[1]}`)
                         }
                     })
-            }).catch(err=>{
-                    console.log(err.message);
-                    return message.reply(err.message);
-            })
+                }).catch(err=>{
+                        console.log(err.message);
+                        return message.reply(err.message);
+                })
                 break;
             case 'database':
                 args[1] = isMention(args[1])
                 db.serialize(function(){
                     db.get("SELECT * FROM Users WHERE OrderID = ? OR DiscordID = ?",[args[1],args[1]],function(err,row){
-                        if(!row)
-                            return message.reply('No entry found in database');
-                        else{
+                        if(!row)return message.reply('No entry found in database');
+                        else if(err) return message.reply(err);
                         const embed_out = embeds.DatabaseEntry(row);
                         return message.channel.send(embed_out);
-                        }
                     })
                 })
                 break;

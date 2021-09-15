@@ -3,7 +3,6 @@ const fs = require('fs');
 function create(){
         fs.exists('./database/users.db',async function(exist){
             if(exist){
-                console.log('Database already exist!');
                 return;
             }
           return new Promise(resolve=>{

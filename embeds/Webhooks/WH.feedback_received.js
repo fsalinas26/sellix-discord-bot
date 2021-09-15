@@ -3,7 +3,7 @@ const config = require('../../config.json');
 module.exports = {
     name: 'feedback:received',
     Webhook: true,
-    channel: config.webhook_channels['feedback:received'],
+    channel: config.webhook_channels['feedback:received'] ?config.webhook_channels['feedback:received']:config.webhook_channels['default'],
     execute(data){
         const embed = new Discord.MessageEmbed()
         .setTitle('New Feedback Recevied')
@@ -13,7 +13,7 @@ module.exports = {
         .addFields(
             {name: 'Product', value: data.product_title, inline:true},
             {name: 'Review', value: data.message, inline:true},
-            {name: 'Starts', value: `${data.score}/5`,inline:true},
+            {name: 'Stars', value: `${data.score}/5`,inline:true},
         )
         .setFooter('This is a webhook notification from Sellix.io Discord Bot (github/fsalinas26)')
         .setTimestamp();

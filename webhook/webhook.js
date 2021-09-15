@@ -6,7 +6,6 @@ const port = 3000;
 const eventHandler = require('events');
 const event = new eventHandler();
 
-
 app.use(bodyParser.json());
 app.post('/hook',async(req,res)=>{
     res.sendStatus(200);

@@ -7,6 +7,8 @@ const webhook = require('./webhook/webhook');
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] })
 client.commands = new Discord.Collection();
 
+const db_create = require('./database/createDB');
+db_create.create();
 const sqlite3 = require("sqlite3");
 const database_filepath = "./database/users.db";
 const db = new sqlite3.Database(database_filepath);

@@ -1,12 +1,12 @@
 const Sellix = require('sellix-api-wrapper');
 const config = require('../config.json');
 const fs = require('fs');
-
+const embed = require('../embeds/Commands/embeds')
 module.exports = {
     name: "nickname",
     guildOnly: false,
     adminOnly: true,
-    execute(message,args){
+    async execute(message,args){
         const input = args[0];
         switch(input)
         {
@@ -16,25 +16,24 @@ module.exports = {
                 obj[args[1]] = args[2];
                 config.nicknames = {...config.nicknames,...obj};
                 fs.writeFile('./config.json',JSON.stringify(config,null,' \t'),function(err,data){
-                    return message.reply(`Added product nickname to **config.json**\`\`\`Nickname: ${args[1]}\nProduct ID: ${args[2]}\`\`\``);
+                    const embed_out = embed.AddNickname(args[1],args[2]);
+                    return message.channel.send(embed_out); 
                 });
                 break;
             case 'delete':
                 if(!args[1]) return message.reply("Missing Product Nickname!");
                 delete config.nicknames[args[1]];
                 fs.writeFile('./config.json',JSON.stringify(config,null,' \t'),function(err,data){
-                    return message.reply(`Deleted nickname ${args[1]}`)
+                    const embed_out = embed.RemoveNickname(args[1])
+                    return message.channel.send(embed_out); 
                 });
                 break;
             case 'all':
-                let str = "All Nicknames```";
+                let map = [];
                 for(const [key,value] of Object.entries(config.nicknames))
-                {
-                    str+= `Nickname: ${key}\nProduct ID: ${value}\n\n`;
-                }
-                if(Object.keys(config.nicknames).length === 0) str+= "None";
-                str+="```";
-                return message.reply(str);
+		            {map.push({nickname: key, productid: value});}
+                const embed_out = embed.AllNicknames(map);
+                return message.channel.send(embed_out); 
                 break;
             default:
                 break;

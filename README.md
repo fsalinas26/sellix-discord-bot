@@ -33,7 +33,6 @@ Retrieves an order, product, query, or feedback from your shop.
 ?lookup email customerEmail@gmail.com  
 ?lookup product 60b54556886dd  
 ```
-<img width="50%" height="50%" src="https://i.gyazo.com/c3ddea4daff89859f4efc7e6d0d7a32a.png">
 
 ## ?redeem [OrderID]
 Checks if the order is completed and gives a role to the message author and adds a table entry to the SQLite Database.  
@@ -43,7 +42,6 @@ Checks if the order is completed and gives a role to the message author and adds
 ?redeem 3c23df-6cgdf6fG13-194126
 ?redeem 3c23df-6cgdf6fG13-194126 @DemoUser //Redeem an order for someone else
 ```
-<img width="33%" height="33%" src="https://i.gyazo.com/fa535b39fe9d2718829376da2febce09.png">
 
 ## ?restock [productid/nickname] [serials]
 Restocks a product on your website by updating its serials.  
@@ -52,7 +50,6 @@ Restocks a product on your website by updating its serials.
 ?restock 6ab37fif7e9 A8FJ1LI, FEBURLAO, C3L1F8A0, G8LA1L3JF  //Use comma-seperated list for serials  
 ?restock demo_nickname A8FJ1LI, FEBURLAO, C3L1F8A0, G8LA1L3JF //See below for adding product nicknames
 ```
-<img width="40%" height="40%" src="https://i.gyazo.com/35cde386f489baa4fa32f509c42fe7b4.png">
 
 
 ## ?reply [query/feedback] [id] [reply] 
@@ -64,7 +61,6 @@ Replies to a query or feedback by id.
 ?reply q Everything all set?      //replies to the most recent query
 ?reply f Thanks for the feedback! //replies to the most recent feedback
 ```
-<img width="37%" height="37%" src="https://i.gyazo.com/6e7183506e234ebd7c4e5209feea0ee3.png">  
 
 ## ?products  
 Retrieves all products and sends an iterable Discord embed.
@@ -94,7 +90,6 @@ Sets a nickname for a specific product ID in **config.json**
 ?nickname add demo_nickname 6ab37fif7e9 // ProductID 6ab37fif7e9 can now be referenced using 'demo_nickname'
 ?nickname delete demo_nickname // Deletes 'demo_nickname' from nicknames
 ```
-<img width="33%" height="33%" src="https://i.gyazo.com/62345e91e22c7d253a70c1ebf40147b7.png">
 
 ## ?set [WebhookEvent]  
 Sets the current channel to receive a specific webhook.  
@@ -104,7 +99,6 @@ Sets the current channel to receive a specific webhook.
 ?set order:paid //Sets current channel to receive all order:paid webhooks
 ?set feedback:received //Sets current channel to receive all feedback:received webhooks
 ```
-<img width="40%" height="40%" src="https://i.gyazo.com/9c37556fe4f38486be2660409566d485.png">
 
 
 # Sellix Webhooks  
@@ -113,6 +107,3 @@ I embeded a simple express app to receive webhooks from Sellix.io, all you have 
 <img width="40%" height="40%" src="https://i.gyazo.com/b73509330ed011f94e1a03e9be34902e.png">
 
 Current supported webhook events are **order:paid**, **feedback:received**, **query:created**, **query:replied**, **product:stock**, **order:disputed**  
-
-*Example of feedback:received webhook*  
-<img width="50%" height="50%" src="https://i.gyazo.com/2398213d55d2f96003768e0ab19f9aed.png">

@@ -78,6 +78,15 @@ Retrieves all queries and sends an iterable Discord embed.
 ## ?feedback  
 Retrieves all feedback and sends an iterable Discord embed.
 
+## ?admin [add/remove/all] [DiscordTag]
+Grant or revoke access to admin commands for a specific user  
+**Usage:**  
+```
+?admin add @cisco
+?admin remove @cisco
+?admin all //Displays all admins
+```
+
 ## ?nickname [add/delete/all] 
 Sets a nickname for a specific product ID in **config.json**  
 **Usage:**

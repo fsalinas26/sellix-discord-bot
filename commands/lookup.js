@@ -1,6 +1,5 @@
 const Sellix = require('sellix-api-wrapper');
 const config = require('../config.json');
-const embeds = require('../embeds/commands/embeds');
 const API = new Sellix.API(config.sellix_auth);
 const embed = require('../embeds/commands/embeds.js')
 
@@ -114,7 +113,7 @@ module.exports = {
                     db.get("SELECT * FROM Users WHERE OrderID = ? OR DiscordID = ?",[args[1],args[1]],function(err,row){
                         if(!row)return message.reply('No entry found in database');
                         else if(err) return message.reply(err);
-                        const embed_out = embeds.DatabaseEntry(row);
+                        const embed_out = embed.DatabaseEntry(row);
                         return message.channel.send(embed_out);
                     })
                 })

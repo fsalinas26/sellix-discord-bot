@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 const config = require('../config.json')
-const embeds = require('../embeds/commands/embeds.js')
+const embeds = require('../embeds/Commands/embeds.js')
 const fs = require('fs')
 
 module.exports = {

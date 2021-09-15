@@ -3,17 +3,24 @@
 const fs = require('fs');
 const Discord = require('discord.js');
 const config = require('./config.json');
-const eventEmitter = require('events');
-const embeds = require('./commands/embeds');
 const webhook = require('./webhook/webhook');
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] })
 client.commands = new Discord.Collection();
+
+const sqlite3 = require("sqlite3");
+const database_filepath = "./database/users.db";
+const db = new sqlite3.Database(database_filepath);
 
 
 function ImportCommands() {
 	const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 	for (const file of commandFiles) {
 		const command = require(`./commands/${file}`);
+		client.commands.set(command.name, command);
+	}
+	const webhookFiles = fs.readdirSync('./embeds/Webhooks').filter(file => file.endsWith('.js'));
+	for (const file of webhookFiles) {
+		const command = require(`./embeds/Webhooks/${file}`);
 		client.commands.set(command.name, command);
 	}
 }
@@ -35,7 +42,7 @@ webhook.event.on('event',function(event_name, event_data){
 	const command = client.commands.get(event_name);
 	if(!command)return;
 	var embed = command.execute(event_data);
-	const channel = client.channels.cache.get(config.webhook_channel);
+	const channel = client.channels.cache.get(command.channel);
 	if(embed)channel.send(embed);
 })
 
@@ -48,7 +55,7 @@ client.on('message', async message => {
 	const commandName = args.shift().toLowerCase();
 
 	const command = client.commands.get(commandName);
-
+	if (!webhook) return;
 	if (!command) return;
 
 	if (message.channel.type === "dm") {
@@ -57,11 +64,12 @@ client.on('message', async message => {
 
 	if (command.adminOnly) {
 		const adminArray = config.admins;
-		if (!adminArray.includes(message.author.id)) return message.reply('You don\'t have the permission to execute this command.');
+		if (!adminArray.includes(message.author.id))
+			return message.reply('You don\'t have the permission to execute this command.');
 	}
 
 	try {
-		await command.execute(message, args);
+		await command.execute(message, args,db);
 	}
 	catch (error) {
 		console.error(error);

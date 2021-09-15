@@ -129,10 +129,25 @@ function OrderRedeem(OrderID, DiscordID, DateRedeemed)
 	return embed;
 }
 
+function DatabaseEntry(row)
+{
+	const embed = new Discord.MessageEmbed()
+	.setTitle('Lookup Database')
+	.setDescription('An entry has been found in the database!')
+	.setThumbnail('https://i.gyazo.com/316c9684acb080339c1d3df1327a41b2.png')
+	.addFields(
+		{name: 'OrderID', value: row.OrderID, inline:false},
+		{name: 'DiscordID', value: `<@${row.DiscordID}>`,inline:false},
+		{name: 'Date Redeemed',value: macros.displayDate(new Date(parseInt(row.RedeemedOn))),inline: false}
+	)
+	.setTimestamp()
+	return embed;
+}
+
 function WebhookChannel(WebhookEvent, ChannelID)
 {
 	const embed = new Discord.MessageEmbed()
-	.setTitle(`${WebhookEvent} Webhook Event Channel Set!`)
+	.setTitle(`Webhook Event Channel Set: ${WebhookEvent}`)
 	.setDescription('A channel has been set to receive webhooks')
 	.setThumbnail('https://i.gyazo.com/325afc4bba55fe7d20feb0bd480dff92.png')
 	.addFields(
@@ -162,5 +177,6 @@ module.exports = {
 	FeedbackReply:FeedbackReply,
 	OrderRedeem:OrderRedeem,
 	WebhookChannel:WebhookChannel,
-	ShowAdmins:ShowAdmins
+	ShowAdmins:ShowAdmins,
+	DatabaseEntry:DatabaseEntry
 }

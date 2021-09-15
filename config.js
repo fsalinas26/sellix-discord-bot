@@ -24,15 +24,21 @@ var questions = [
   },
   {
     type: 'input',
-    name: 'webhook_channel',
-    message: "ChannelID to Send Webhooks: "
-  }
+    name: 'webhook_channels',
+    message: "Default Discord Channel ID to Send Webhooks: "
+  },
+  {
+    type: 'input',
+    name: 'role_to_give',
+    message: "Discord Role ID to give users when they redeem an order: "
+  },
 ]
 
 inquirer.prompt(questions).then(answers => {
+  answers['webhook_channels'] = {"default":answers['webhook_channels']};
   answers['admins'] = answers['admins'].split(',');
   answers['nicknames'] = {'exampleProduct':'6abc74103id'};
-  fs.writeFile('./config.json',JSON.stringify(answers),function(err,data){
+  fs.writeFile('./config.json',JSON.stringify(answers,null,' \t'),function(err,data){
       console.log(answers);
   });
   console.log('config.json created successfully');

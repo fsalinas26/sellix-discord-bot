@@ -6,14 +6,17 @@ const macros = require('./macros');
 const query1 = `SELECT * FROM Users WHERE OrderID = ?`;
 const query2 = `INSERT INTO Users(OrderID, DiscordID, RedeemedOn) VALUES (?,?,?)`
 
-function isMention(string)
+function isMention(mention)
 {
-    var str_out = "null";
-    if(string.startsWith('<@') && string.endsWith('>'))
-    {
-        str_out = string.substr(2,string.length-3);
-    }
-    return str_out;
+    if (mention.startsWith('<@') && mention.endsWith('>')) 
+		{
+			mention = mention.slice(2, -1); 
+			if (mention.startsWith('!')) 
+			{
+				mention = mention.slice(1);
+			}
+			return mention
+		}
 
 }
 module.exports = {
@@ -21,7 +24,7 @@ module.exports = {
     guildOnly: true,
     adminOnly: false,
     execute(message,args,db){
-        if(!args.length)return message.reply('Format is **?redeem [orderID]**')
+        if(!args.length)return message.reply('Format is **?redeem [OrderID]**')
         const OrderID = args[0];
         const DiscordID = args[1]?isMention(args[1]):message.author.id;
         const DateRedeemed = new Date();

@@ -4,7 +4,7 @@ A Complete Sellix.io Discord Bot using my [API wrapper](https://github.com/fsali
   <img src="https://i.gyazo.com/0943bf2926d9221f493fe2b6785080f6.png">
 </p>
 
-* [Config.json](https://github.com/fsalinas26/sellix-discord-bot#config.json)
+* [Config.json](https://github.com/fsalinas26/sellix-discord-bot#configjson)
 * [Commands](https://github.com/fsalinas26/sellix-discord-bot#commands)
 * [Webhooks](https://github.com/fsalinas26/sellix-discord-bot#sellix-webhooks)
 

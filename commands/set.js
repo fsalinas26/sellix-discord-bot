@@ -12,7 +12,8 @@ module.exports = {
         config.webhook_channels[args[0]] = message.channel.id;
         fs.writeFile('./config.json',JSON.stringify(config,null,' \t'),function(err,data){
             const embed = embeds.WebhookChannel(args[0],message.channel.id)
-            return message.reply(embed);
+            message.channel.send(embed);
+            return message.reply('Reload bot for changes to take effect')
         });
     }
 }

@@ -7,7 +7,7 @@ A Complete Sellix.io Discord Bot using my [API wrapper](https://github.com/fsali
 * [Config.json](https://github.com/fsalinas26/sellix-discord-bot#config.json)
 * [Commands](https://github.com/fsalinas26/sellix-discord-bot#commands)
 * [Webhooks](https://github.com/fsalinas26/sellix-discord-bot#sellix-webhooks)
-* [SQLite Database](https://github.com/fsalinas26/sellix-discord-bot#sqlite-database)
+* [SQLite Database](https://github.com/fsalinas26/sellix-discord-bot#database)
 
 # Requirements
 * Sellix.io API Key
@@ -58,7 +58,7 @@ Retrieves an order, product, query, or feedback from your shop.
 ```
 
 ## ?redeem [OrderID]
-Checks if the order is completed and gives a role to the message author and adds a table entry to the [SQLite Database](https://github.com/fsalinas26/sellix-discord-bot#sqlite-database). Orders can only be redeemed once. Set *role_to_give* in config.json.  
+Checks if the order is completed and gives a role to the message author and adds a table entry to the [SQLite Database](https://github.com/fsalinas26/sellix-discord-bot#database). Orders can only be redeemed once. Set *role_to_give* in config.json.  
 **Usage:**  
 ```
 ?redeem 3c23df-6cgdf6fG13-194126

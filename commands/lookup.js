@@ -3,21 +3,6 @@ const config = require('../config.json');
 const API = new Sellix.API(config.sellix_auth);
 const embed = require('../embeds/commands/embeds.js')
 
-function isMention(mention)
-{
-    if (mention.startsWith('<@') && mention.endsWith('>')) 
-		{
-			mention = mention.slice(2, -1); 
-			if (mention.startsWith('!')) 
-			{
-				mention = mention.slice(1);
-			}
-			return mention
-		}else{
-      return mention;
-    }
-}
-
 module.exports = {
     name: "lookup",
     guildOnly: false,
@@ -105,17 +90,6 @@ module.exports = {
                 }).catch(err=>{
                         console.log(err.message);
                         return message.reply(err.message);
-                })
-                break;
-            case 'database':
-                args[1] = isMention(args[1])
-                db.serialize(function(){
-                    db.get("SELECT * FROM Users WHERE OrderID = ? OR DiscordID = ?",[args[1],args[1]],function(err,row){
-                        if(!row)return message.reply('No entry found in database');
-                        else if(err) return message.reply(err);
-                        const embed_out = embed.DatabaseEntry(row);
-                        return message.channel.send(embed_out);
-                    })
                 })
                 break;
             default:

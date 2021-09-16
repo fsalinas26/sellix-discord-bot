@@ -48,7 +48,7 @@ You can run the command **npm run setup** or **node config.js** to initialize yo
 
 # Commands
 
-## ?lookup [order/product/email/query/feedback] [id]
+## ?lookup order/product/email/query/feedback [id]
 Retrieves an order, product, query, or feedback from your shop.  
 **Usage:**  
 ```
@@ -75,7 +75,7 @@ Restocks a product on your website by updating its serials.
 ```
 
 
-## ?reply [query/feedback] [id] [reply] 
+## ?reply query/feedback [id] [reply] 
 Replies to a query or feedback by id.  
 **Usage:**
 ```
@@ -97,7 +97,7 @@ Retrieves all queries and sends an iterable Discord embed.
 ## ?feedback  
 Retrieves all feedback and sends an iterable Discord embed.
 
-## ?admin [add/remove/all] [DiscordTag]
+## ?admin add/remove/all [DiscordID]
 Grant or revoke access to admin commands for a specific user  
 **Usage:**  
 ```
@@ -106,7 +106,7 @@ Grant or revoke access to admin commands for a specific user
 ?admin all //Displays all admins
 ```
 
-## ?nickname [add/delete/all] 
+## ?nickname add/delete/all [Nickname] [ProductID] 
 Sets a nickname for a specific product ID in **config.json**  
 **Usage:**
 ```
@@ -135,7 +135,7 @@ Current supported webhook events are **order:paid**, **feedback:received**, **qu
 
 # Database
 When an OrderID is [redeemed](https://github.com/fsalinas26/sellix-discord-bot#redeem-orderid), the user will be given the role specified in config.json (*role_to_give*). A new table entry will also be inserted into the SQLite Database containing the OrderID, DiscordID, Date Redeemed, and Expiry Date. *The Expiry Date is by default set to 30 days from when the invoice was redeemed.* However, you can manually set a users expiry date using the *?database expire* command below.  
-## ?database [find/remove/set/expire/refresh/all] [DiscordID/OrderID]  
+## ?database find/remove/set/expire/refresh/all [DiscordID/OrderID]  
 **Usage**  
 ```
 ?database find @cisco //Find a table entry by DiscordID 

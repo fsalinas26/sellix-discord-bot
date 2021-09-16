@@ -4,9 +4,10 @@ A Complete Sellix.io Discord Bot using my [API wrapper](https://github.com/fsali
   <img src="https://i.gyazo.com/0943bf2926d9221f493fe2b6785080f6.png">
 </p>
 
-* [Config.json](https://github.com/fsalinas26/sellix-discord-bot#configjson)
+* [Config.json](https://github.com/fsalinas26/sellix-discord-bot#config.json)
 * [Commands](https://github.com/fsalinas26/sellix-discord-bot#commands)
 * [Webhooks](https://github.com/fsalinas26/sellix-discord-bot#sellix-webhooks)
+* [SQLite Database](https://github.com/fsalinas26/sellix-discord-bot#sqlite-database)
 
 # Requirements
 * Sellix.io API Key
@@ -125,11 +126,23 @@ Sets the current channel to receive a specific webhook.
 
 
 # Sellix Webhooks  
-I embeded a simple express app to receive webhooks from Sellix.io, all you have to do is set it up on your shop. The default port for the webhook is 3000, and all webhook request should be forwarded to your server address (where the bot is hosted) with the */hook* endpoint  
+There is an embeded express app to receive webhooks from Sellix.io, all you have to do is set it up on your shop. The default port for the webhook is 3000, and all webhook request should be forwarded to your server address (where the bot is hosted) with the */hook* endpoint  
 [Add Sellix Webhook Endpoint](https://dashboard.sellix.io/developer/webhooks/all)  
 <img width="40%" height="40%" src="https://i.gyazo.com/b73509330ed011f94e1a03e9be34902e.png">
 
 Current supported webhook events are **order:paid**, **feedback:received**, **query:created**, **query:replied**, **product:stock**, **order:disputed**  
 [See here for more info on Sellix Webhooks](https://developers.sellix.io/documentation#webhooks)  
 
+# Database
+When an OrderID is [redeemed](https://github.com/fsalinas26/sellix-discord-bot#redeem-orderid), the user will be given the role specified in config.json (*role_to_give*). A new table entry will also be inserted into the SQLite Database containing the OrderID, DiscordID, Date Redeemed, and Expiry Date. *The Expiry Date is by default set to 30 days from when the invoice was redeemed.* However, you can manually set a users expiry date using the *?database expire* command below.  
+## ?database [find/remove/set/expire/refresh/all] [DiscordID/OrderID]  
+**Usage**  
+```
+?database find @cisco //Find a table entry by DiscordID 
+?database find 3c23df-6cgdf6fG13-194126 //Find a table entry by OrderID
+?database remove 3c23df-6cgdf6fG13-194126 //Removes table entry from database by OrderID
+?database all //Displays All Table Entries
+?database refresh //Remove roles from all expired database entries
+?database expire @cisco 15//Sets expiry date for table entry to 15 days from current day.
+```
 

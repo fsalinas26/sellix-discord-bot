@@ -23,10 +23,8 @@ module.exports = {
     execute(message,args,db){
         const input = args[0];
         const role = message.member.guild.roles.cache.get(config.role_to_give)
-        if(args[1])
-        {
-            args[1] = isMention(args[1]);
-        }
+        if(args[1]) args[1] = isMention(args[1]);
+        if(args[2]) args[2] = isMention(args[2]);
         db.serialize(function(){
             switch(input)
             {
@@ -84,9 +82,9 @@ module.exports = {
                             })
                             break;
                         case 'set':
-                            db.run("UPDATE Users SET DiscordID = ? WHERE OrderID = ? OR DiscordID = ?",[args[2],args[1],args[1]],function(err){
+                            db.run("UPDATE Users SET DiscordID = ? WHERE OrderID = ?",[args[2],args[1]],function(err){
                                 message.reply('Updated entry in database...');
-                                db.get("SELECT * FROM Users WHERE OrderID = ? OR DiscordID = ?",[args[1],args[1]],function(err,row){
+                                db.get("SELECT * FROM Users WHERE OrderID = ?",[args[1]],function(err,row){
                                     const embed_out = embed.DatabaseEntry(row);
                                     return message.channel.send(embed_out);
                                 })

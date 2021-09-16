@@ -12,7 +12,7 @@ function create(){
               }
               console.log("Succesfully created Database"); 
               db.serialize(function() {
-                  db.run("CREATE TABLE Users (OrderID UNIQUE, DiscordID TEXT, RedeemedOn TEXT)");
+                  db.run("CREATE TABLE Users (OrderID UNIQUE, DiscordID TEXT, RedeemedOn REAL, Expiry REAL)");
                   db.each("SELECT * FROM Users", function(err, row) {
                       console.log(row);
                   });

@@ -7,6 +7,13 @@ function displayDate(time)
     return str_out;
 }
 
+function expiryDate(days)
+{
+    let expiry_date = new Date(); 
+    expiry_date.setDate(expiry_date.getDate() + days);
+    return (expiry_date.getTime()/1000);
+}
+
 function displayTime(time)
 {
     let day = new Date(time*1000);
@@ -17,5 +24,6 @@ function displayTime(time)
 
 module.exports = {
     displayDate: displayDate,
-    displayTime: displayTime
+    displayTime: displayTime,
+    expiryDate: expiryDate
 }

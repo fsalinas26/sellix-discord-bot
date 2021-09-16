@@ -1,9 +1,10 @@
 # Sellix Discord Bot
-Complete Sellix.io Discord Bot using my [API wrapper](https://github.com/fsalinas26/sellix-api-wrapper)  
+A Complete Sellix.io Discord Bot using my [API wrapper](https://github.com/fsalinas26/sellix-api-wrapper)  
 <p align="center">
   <img src="https://i.gyazo.com/0943bf2926d9221f493fe2b6785080f6.png">
 </p>
 
+* [Config.json](https://github.com/fsalinas26/sellix-discord-bot#config.json)
 * [Commands](https://github.com/fsalinas26/sellix-discord-bot#commands)
 * [Webhooks](https://github.com/fsalinas26/sellix-discord-bot#sellix-webhooks)
 
@@ -22,6 +23,27 @@ npm run setup //run this script to initialize your config.json using CLI
 node index.js  
 ```
 
+# Config.json  
+You can run the command **npm run setup** or **node config.js** to initialize your config.json file.  
+```js
+{
+ 	"token": "YOUR_DISCORD_BOT_TOKEN",
+ 	"sellix_auth": "YOUR_SELLIX_API_KEY",
+ 	"prefix": "?", //Command prefix for the bot to listen for
+ 	"admins": [ //List of DiscordID's that have access to admin commands
+ 	 	"648190333849104912",
+ 	 	"383010848124910275"
+ 	],
+ 	"webhook_channels": { //Use set command to set webhook-specific channels
+ 	 	"default": "884192017828910293" //Default ChannelID to route all webhook events
+   },
+ 	"role_to_give": "887571247850999878", //The Discord RoleID to grant users when they redeem a completed order.
+ 	"nicknames": { //Product Nicknames for easier reference
+ 	 	"demoNickname": "60c54fa7bc1ff"
+ 	}
+}
+```
+
 
 # Commands
 
@@ -35,8 +57,8 @@ Retrieves an order, product, query, or feedback from your shop.
 ```
 
 ## ?redeem [OrderID]
-Checks if the order is completed and gives a role to the message author and adds a table entry to the SQLite Database.  
-*Set role to give in config.json*  
+Checks if the order is completed and gives a role to the message author and adds a table entry to the SQLite Database. Orders can only be redeemed once.  
+*Set role_to_give in config.json*  
 **Usage:**  
 ```
 ?redeem 3c23df-6cgdf6fG13-194126
@@ -89,6 +111,7 @@ Sets a nickname for a specific product ID in **config.json**
 ```
 ?nickname add demo_nickname 6ab37fif7e9 // ProductID 6ab37fif7e9 can now be referenced using 'demo_nickname'
 ?nickname delete demo_nickname // Deletes 'demo_nickname' from nicknames
+?nickname all // Shows all nicknames
 ```
 
 ## ?set [WebhookEvent]  
@@ -107,3 +130,6 @@ I embeded a simple express app to receive webhooks from Sellix.io, all you have 
 <img width="40%" height="40%" src="https://i.gyazo.com/b73509330ed011f94e1a03e9be34902e.png">
 
 Current supported webhook events are **order:paid**, **feedback:received**, **query:created**, **query:replied**, **product:stock**, **order:disputed**  
+[See here for more info on Sellix Webhooks](https://developers.sellix.io/documentation#webhooks)  
+
+

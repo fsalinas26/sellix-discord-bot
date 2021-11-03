@@ -24,10 +24,6 @@ npm run setup //run this script to initialize your config.json using CLI
 node index.js  
 ```
 
-## OR
-
-# Discord Bot Invite
-https://discord.com/api/oauth2/authorize?client_id=899383876525367307&permissions=536931328&scope=bot  
 
 # Config.json  
 You can run the command **npm run setup** or **node config.js** to initialize your config.json file.  

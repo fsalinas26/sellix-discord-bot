@@ -50,7 +50,7 @@ webhook.event.on('event',function(event_name, event_data){
 
 client.on('message', async message => {
 	const prefix = config.prefix;
-	if (!message.content.startsWith(prefix));
+	if (!message.content.startsWith(prefix))return;
 	if (message.author === client.user || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);

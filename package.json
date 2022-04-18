@@ -12,8 +12,7 @@
     "discord.js": "^12.5.3",
     "express": "^4.17.1",
     "inquirer": "^8.1.2",
-    "sellix-api-wrapper": "^1.0.7",
-    "sqlite3": "^5.0.2"
+    "sellix-api-wrapper": "^1.0.7"
   },
   "repository": {
     "type": "git",

@@ -7,7 +7,6 @@ A Complete Sellix.io Discord Bot using my [API wrapper](https://github.com/fsali
 * [Config.json](https://github.com/fsalinas26/sellix-discord-bot#config.json)
 * [Commands](https://github.com/fsalinas26/sellix-discord-bot#commands)
 * [Webhooks](https://github.com/fsalinas26/sellix-discord-bot#sellix-webhooks)
-* [SQLite Database](https://github.com/fsalinas26/sellix-discord-bot#database)
 
 # Requirements
 * Sellix.io API Key
@@ -56,14 +55,6 @@ Retrieves an order, product, query, or feedback from your shop.
 ?lookup order 3c23df-6cgdf6fG13-194126  
 ?lookup email customerEmail@gmail.com  
 ?lookup product 60b54556886dd  
-```
-
-## ?redeem [OrderID]
-Checks if the order is completed and gives a role to the message author and adds a table entry to the [SQLite Database](https://github.com/fsalinas26/sellix-discord-bot#database). Orders can only be redeemed once. Set *role_to_give* in config.json.  
-**Usage:**  
-```
-?redeem 3c23df-6cgdf6fG13-194126
-?redeem 3c23df-6cgdf6fG13-194126 @DemoUser //Redeem an order for someone else
 ```
 
 ## ?restock [productid/nickname] [serials]
@@ -132,17 +123,3 @@ There is an embeded express app to receive webhooks from Sellix.io, all you have
 
 Current supported webhook events are **order:paid**, **feedback:received**, **query:created**, **query:replied**, **product:stock**, **order:disputed**  
 [See here for more info on Sellix Webhooks](https://developers.sellix.io/documentation#webhooks)  
-
-# Database
-When an OrderID is [redeemed](https://github.com/fsalinas26/sellix-discord-bot#redeem-orderid), the user will be given the role specified in config.json (*role_to_give*). A new table entry will also be inserted into the SQLite Database containing the OrderID, DiscordID, Date Redeemed, and Expiry Date. *The Expiry Date is by default set to 30 days from when the invoice was redeemed.* However, you can manually set a users expiry date using the *?database expire* command below.  
-## ?database find/remove/set/expire/refresh/all [DiscordID/OrderID]  
-**Usage**  
-```
-?database find @cisco //Find a table entry by DiscordID 
-?database find 3c23df-6cgdf6fG13-194126 //Find a table entry by OrderID
-?database remove 3c23df-6cgdf6fG13-194126 //Removes table entry from database by OrderID
-?database all //Displays All Table Entries
-?database refresh //Remove roles from all expired database entries
-?database expire @cisco 15//Sets expiry date for table entry to 15 days from current day.
-```
-

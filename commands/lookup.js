@@ -7,7 +7,7 @@ module.exports = {
     name: "lookup",
     guildOnly: false,
     adminOnly: true,
-    execute(message,args,db){
+    execute(message,args){
         if(!args.length)return message.reply('Format is **?lookup [type] [id]**')
         const input = args[0];
         switch(input)

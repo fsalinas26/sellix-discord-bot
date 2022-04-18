@@ -131,45 +131,6 @@ function OrderRedeem(OrderID, DiscordID, DateRedeemed,Expiry)
 	return embed;
 }
 
-function DatabaseEntry(row)
-{
-	const embed = new Discord.MessageEmbed()
-	.setTitle('Lookup Database')
-	.setDescription('An entry has been found in the database!')
-	.setThumbnail('https://i.gyazo.com/316c9684acb080339c1d3df1327a41b2.png')
-	.addFields(
-		{name: 'OrderID', value: row.OrderID, inline:false},
-		{name: 'DiscordID', value: `<@${row.DiscordID}>`,inline:false},
-		{name: 'Date Redeemed',value: macros.displayDate(row.RedeemedOn),inline: false},
-		{name: 'Expiry', value: macros.displayDate(row.Expiry),inline:false}
-	)
-	.setTimestamp()
-	return embed;
-}
-
-function AllEntries(users)
-{
-	const embed = new Discord.MessageEmbed()
-	.setTitle(`All Entries`)
-	.setDescription('A list of all entries in the database')
-	.setThumbnail('https://i.gyazo.com/316c9684acb080339c1d3df1327a41b2.png')
-	users.forEach(o=>{embed.addField(`OrderID ${o.OrderID}`,`DiscordID <@${o.DiscordID}>\nExpiry: ${macros.displayDate(o.Expiry)}`)})
-	embed.setTimestamp()
-
-	return(embed);
-}
-
-function AllExpired(users)
-{
-	const embed = new Discord.MessageEmbed()
-	.setTitle(`Expired Users`)
-	.setDescription('A list of all expired users in the database')
-	.setThumbnail('https://i.gyazo.com/316c9684acb080339c1d3df1327a41b2.png')
-	users.forEach(o=>{embed.addField(`OrderID ${o.OrderID}`,`DiscordID <@${o.DiscordID}>\nExpiry: ${macros.displayDate(o.Expiry)}`)})
-	embed.setTimestamp()
-	return(embed);
-}
-
 
 function WebhookChannel(WebhookEvent, ChannelID)
 {
@@ -243,7 +204,6 @@ module.exports = {
 	OrderRedeem:OrderRedeem,
 	WebhookChannel:WebhookChannel,
 	ShowAdmins:ShowAdmins,
-	DatabaseEntry:DatabaseEntry,
 	AddNickname:AddNickname,
 	RemoveNickname:RemoveNickname,
 	AllNicknames:AllNicknames,
